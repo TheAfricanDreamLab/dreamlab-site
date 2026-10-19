@@ -1,5 +1,9 @@
-/** Where sign-in, sign-up and organisation set-up live (dreamlab-web). */
-const APP_URL = (import.meta.env.PUBLIC_APP_URL ?? 'http://localhost:3100').replace(/\/$/, '');
+/**
+ * Where sign-in, sign-up and organisation set-up live (dreamlab-web). Empty in production: the
+ * site and the app share a hostname (the edge sends app paths to the web app), so links stay
+ * relative and one build serves prod and staging. Local development sets it to the web app's URL.
+ */
+const APP_URL = (import.meta.env.PUBLIC_APP_URL ?? '').replace(/\/$/, '');
 
 export const app = (path: string) => `${APP_URL}${path}`;
 

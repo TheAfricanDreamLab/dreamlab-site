@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: process.env.SITE_URL ?? 'https://theafricandreamlab.com',
+  site: process.env.SITE_URL ?? 'https://learn.theafricandreamlab.com',
   integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] },
 });
