@@ -1,0 +1,83 @@
+---
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/figtree';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import Brand from '../components/Brand.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import { app, NAV } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'A learning management platform born from TADIS, the African Dream Network International Summit. Courses, cohorts and certificates for learners, schools and teams.',
+} = Astro.props;
+const fullTitle = title ? `${title} · The African Dream Lab` : 'The African Dream Lab';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0a3d29" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="The African Dream Lab" />
+  </head>
+  <body class="min-h-dvh">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-lg focus:bg-card focus:px-4 focus:py-2">Skip to content</a>
+    <header class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
+      <Brand compact />
+      <nav aria-label="Main" class="flex items-center gap-2 text-[14px] font-semibold sm:gap-6">
+        {
+          NAV.map((n) => (
+            <a href={n.href} aria-current={path === n.href ? 'page' : undefined} class:list={['hidden md:inline', path === n.href ? 'text-ink' : 'text-body hover:text-ink']}>
+              {n.label}
+            </a>
+          ))
+        }
+        <a href={app('/login')} class="whitespace-nowrap px-1 text-ink hover:text-link sm:px-2">Sign in</a>
+        <ButtonLink href={app('/signup')} class="h-10 px-3 text-[14px] sm:px-4">Get started</ButtonLink>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="border-t border-line">
+      <div class="mx-auto grid max-w-6xl gap-8 px-5 py-10 text-[13.5px] sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div class="space-y-3">
+          <Brand />
+          <p class="max-w-sm leading-relaxed text-muted">A learning management platform born from TADIS, the African Dream Network International Summit.</p>
+        </div>
+        <nav aria-label="Site" class="flex flex-col gap-2">
+          <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Explore</span>
+          {NAV.map((n) => <a href={n.href} class="text-body hover:text-ink">{n.label}</a>)}
+          <a href="/apply" class="text-body hover:text-ink">Apply</a>
+        </nav>
+        <nav aria-label="Account" class="flex flex-col gap-2">
+          <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Your account</span>
+          <a href={app('/signup')} class="text-body hover:text-ink">Create an account</a>
+          <a href={app('/login')} class="text-body hover:text-ink">Sign in</a>
+          <a href={app('/terms')} class="text-body hover:text-ink">Terms</a>
+          <a href={app('/privacy')} class="text-body hover:text-ink">Privacy</a>
+        </nav>
+      </div>
+      <p class="mx-auto max-w-6xl px-5 pb-10 text-[13px] text-muted sm:px-8">© {new Date().getFullYear()} The African Dream Network</p>
+    </footer>
+  </body>
+</html>

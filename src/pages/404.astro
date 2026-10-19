@@ -1,0 +1,14 @@
+---
+import ButtonLink from '../components/ButtonLink.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found">
+  <section class="mx-auto max-w-2xl space-y-5 px-5 py-24 text-center sm:px-8">
+    <Eyebrow class="justify-center" tone="gold">404</Eyebrow>
+    <h1 class="text-[40px] font-extrabold leading-tight">We couldn’t find that page.</h1>
+    <p class="text-[16px] text-body">It may have moved. Head back to the start and try again.</p>
+    <ButtonLink href="/">Back to the home page</ButtonLink>
+  </section>
+</Base>

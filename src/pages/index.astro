@@ -1,0 +1,139 @@
+---
+import ButtonLink from '../components/ButtonLink.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Base from '../layouts/Base.astro';
+import { app, PILLARS } from '../lib/site';
+
+const OFFER = [
+  { title: 'Courses', text: 'Short courses and full programmes, broken into modules you can finish one sitting at a time.' },
+  { title: 'Cohorts', text: 'Learn alongside a group, with a weekly rhythm of live classes, deadlines and people to keep you going.' },
+  { title: 'Live classes', text: 'Join classes inside the platform. Attendance, recordings and notes stay with the course.' },
+  { title: 'Projects', text: 'Every course ends in something you make. Instructors and mentors give feedback on real work.' },
+  { title: 'Certificates', text: 'Earn a certificate for what you finish, with a link anyone can use to check it.' },
+  { title: 'Mentors', text: 'Graduates come back as mentors, so every cohort learns from the people who went before.' },
+];
+
+const AUDIENCES = [
+  {
+    tag: 'Learners',
+    title: 'Learn on your own',
+    text: 'Create a free account and start. No school or employer needed.',
+    cta: { label: 'Start learning', href: app('/signup') },
+  },
+  {
+    tag: 'Schools & academies',
+    title: 'Run your cohorts',
+    text: 'Admissions, classes, credit hours and residencies, under your own name and address.',
+    cta: { label: 'Bring your school', href: '/organisations#schools' },
+  },
+  {
+    tag: 'Companies & teams',
+    title: 'Grow your people',
+    text: 'Invite your team, assign learning and see progress. Your space is ready the moment you sign up.',
+    cta: { label: 'Set up your team', href: '/organisations#companies' },
+  },
+  {
+    tag: 'Partners & sponsors',
+    title: 'Teach or fund learning',
+    text: 'Publish courses for others to take, or sponsor learners and follow their progress.',
+    cta: { label: 'Work with us', href: '/organisations#partners' },
+  },
+];
+---
+
+<Base>
+  <section class="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-10 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:pt-16">
+    <div class="animate-rise space-y-6">
+      <Eyebrow tone="gold">Born from TADIS · The African Dream Network International Summit</Eyebrow>
+      <h1 class="text-[44px] font-extrabold leading-[1.02] sm:text-[62px]">
+        Learn to build<br /><span class="text-link">the Africa you want.</span>
+      </h1>
+      <p class="max-w-xl text-[17px] leading-relaxed text-body">
+        The African Dream Lab is a learning management platform that grew out of TADIS. Take courses on your own, join a cohort, run
+        programmes for your school, or train your team, and earn certificates for what you finish.
+      </p>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <ButtonLink href={app('/signup')}>Start learning, it’s free</ButtonLink>
+        <ButtonLink href="/programme" variant="secondary">See the programme</ButtonLink>
+      </div>
+    </div>
+
+    <div class="relative animate-rise [animation-delay:120ms]">
+      <div aria-hidden="true" class="absolute -inset-6 -z-10 rounded-[32px] bg-[radial-gradient(70%_70%_at_30%_20%,#e6f4ec,transparent_70%)]"></div>
+      <div class="space-y-5 rounded-[var(--radius-panel)] bg-[radial-gradient(120%_90%_at_0%_0%,#0f6a49_0%,#0a3d29_65%)] p-7 text-white shadow-[var(--shadow-panel)]">
+        <p class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-gold">Dream · Lead · Transform</p>
+        <ul class="space-y-4">
+          {
+            PILLARS.map((p) => (
+              <li class="flex gap-4 border-t border-white/15 pt-4 first:border-0 first:pt-0">
+                <span class="w-16 shrink-0 font-display text-[22px] font-bold text-gold">{p.title}</span>
+                <span class="text-[14.5px] leading-relaxed text-white/80">{p.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <div class="mb-8 max-w-2xl space-y-2">
+      <Eyebrow>What’s inside</Eyebrow>
+      <h2 class="text-[32px] font-extrabold leading-tight">Everything a learning journey needs, in one place.</h2>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        OFFER.map((o) => (
+          <article class="space-y-2 rounded-[var(--radius-card)] bg-card p-6 ring-1 ring-line">
+            <h3 class="text-[18px] font-bold">{o.title}</h3>
+            <p class="text-[14.5px] leading-relaxed text-body">{o.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <div class="mb-8 max-w-2xl space-y-2">
+      <Eyebrow>Who it’s for</Eyebrow>
+      <h2 class="text-[32px] font-extrabold leading-tight">One platform, every kind of learner.</h2>
+    </div>
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {
+        AUDIENCES.map((a) => (
+          <article class="flex flex-col justify-between gap-6 rounded-[var(--radius-card)] bg-card p-6 shadow-[var(--shadow-card)] ring-1 ring-line">
+            <div class="space-y-3">
+              <span class="inline-flex rounded-full bg-surface px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink ring-1 ring-line">{a.tag}</span>
+              <h3 class="text-[20px] font-bold">{a.title}</h3>
+              <p class="text-[14.5px] leading-relaxed text-body">{a.text}</p>
+            </div>
+            <a href={a.cta.href} class="inline-flex items-center gap-1.5 text-[14.5px] font-semibold text-link transition-all hover:gap-2.5">
+              {a.cta.label} <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mb-20 bg-forest text-white">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+      <div class="space-y-4">
+        <p class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-gold">Born from TADIS</p>
+        <h2 class="text-[32px] font-extrabold leading-tight text-white">The summit ends. The learning doesn’t.</h2>
+        <p class="text-[15.5px] leading-relaxed text-white/75">
+          TADIS, the African Dream Network International Summit, brings emerging African leaders together to dream, lead and transform.
+          The African Dream Lab is where that work carries on after the summit: courses and cohorts, mentors who guide the work, and alumni
+          who come back to teach the next group.
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row lg:justify-end">
+        <ButtonLink href="/about" variant="light">Our story</ButtonLink>
+        <a href="/apply" class="inline-flex h-12 items-center justify-center rounded-[var(--radius-field)] px-6 text-[15px] font-semibold text-white ring-1 ring-white/30 hover:bg-white/10">Apply for a cohort</a>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>
