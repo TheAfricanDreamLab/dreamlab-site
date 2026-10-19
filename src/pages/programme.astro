@@ -1,0 +1,141 @@
+---
+import ButtonLink from '../components/ButtonLink.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Base from '../layouts/Base.astro';
+
+const PHASES = [
+  {
+    n: '01',
+    name: 'Life Architecture',
+    credits: 25,
+    detail: 'Five courses · 5 credits each',
+    text: 'Start with yourself: who you are, what you want to build, and the habits and thinking that will carry you there.',
+  },
+  {
+    n: '02',
+    name: 'Builder’s Architecture',
+    credits: 20,
+    detail: 'Five courses · 4 credits each',
+    text: 'The practical craft of building: turning ideas into plans, plans into work, and work into value for others.',
+  },
+  {
+    n: '03',
+    name: 'Elective',
+    credits: 10,
+    detail: 'Choose one',
+    text: 'Go deep in one skill. Choose Content Creation, Artificial Intelligence or Digital Marketing.',
+  },
+  {
+    n: '04',
+    name: 'Dream Residency',
+    credits: 45,
+    detail: 'Guided project, in stages',
+    text: 'Put it all to work on a real project of your own, in stages, with a mentor beside you and feedback at every step.',
+  },
+];
+
+const CHAIN = ['Knowledge', 'Skill', 'Application', 'Artifact', 'Evidence'];
+
+const WEEK = [
+  { when: 'Two evenings a week', what: 'Live online classes inside the platform. Missed one? The recording waits for you.' },
+  { when: 'Saturday mornings', what: 'In-person sessions to work together, present and get feedback.' },
+  { when: 'Every week', what: 'A named output to finish, so progress is something you can see.' },
+];
+---
+
+<Base title="Programme" description="The African Dream Lab cohort programme: 100 credit hours across four phases, ending in the Dream Residency.">
+  <PageHeader
+    eyebrow="The cohort programme"
+    title="100 credit hours. Four phases. One body of work."
+    intro="The African Dream Lab runs its own cohort programme on the platform. You learn with a group, on a weekly rhythm, and finish with a portfolio of work and a certificate."
+  />
+
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <ol class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {
+        PHASES.map((p) => (
+          <li class="flex flex-col gap-4 rounded-[var(--radius-card)] bg-card p-6 shadow-[var(--shadow-card)] ring-1 ring-line">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[12px] text-muted">{p.n}</span>
+              <span class="rounded-full bg-gold-tint px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.1em] text-gold-ink ring-1 ring-gold-line">
+                {p.credits} credits
+              </span>
+            </div>
+            <div class="space-y-1">
+              <h2 class="text-[21px] font-bold">{p.name}</h2>
+              <p class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-link">{p.detail}</p>
+            </div>
+            <p class="text-[14.5px] leading-relaxed text-body">{p.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="mt-4 h-3 overflow-hidden rounded-full bg-line" aria-hidden="true">
+      <div class="flex h-full">
+        <span class="h-full bg-forest" style="width:25%"></span>
+        <span class="h-full bg-primary" style="width:20%"></span>
+        <span class="h-full bg-gold" style="width:10%"></span>
+        <span class="h-full bg-link/60" style="width:45%"></span>
+      </div>
+    </div>
+    <p class="mt-2 text-[13px] text-muted">25 + 20 + 10 + 45 = 100 credit hours.</p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <div class="grid gap-10 rounded-[var(--radius-panel)] bg-surface p-7 ring-1 ring-line sm:p-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div class="space-y-3">
+        <Eyebrow>How every course works</Eyebrow>
+        <h2 class="text-[28px] font-extrabold leading-tight">You finish each course with something to show.</h2>
+        <p class="text-[14.5px] leading-relaxed text-muted">
+          Each course names the practical output you will make. It is reviewed against a clear rubric and goes into your portfolio.
+        </p>
+      </div>
+      <ol class="flex flex-wrap items-center gap-2 self-center">
+        {
+          CHAIN.map((c, i) => (
+            <li class="flex items-center gap-2">
+              <span class="rounded-full bg-card px-4 py-2 font-display text-[15px] font-bold text-ink ring-1 ring-line">{c}</span>
+              {i < CHAIN.length - 1 && <span aria-hidden="true" class="text-muted">→</span>}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <div class="mb-8 max-w-2xl space-y-2">
+      <Eyebrow>A week in the cohort</Eyebrow>
+      <h2 class="text-[32px] font-extrabold leading-tight">A steady rhythm you can plan around.</h2>
+    </div>
+    <ul class="grid gap-4 md:grid-cols-3">
+      {
+        WEEK.map((w) => (
+          <li class="space-y-2 rounded-[var(--radius-card)] bg-card p-6 ring-1 ring-line">
+            <p class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-link">{w.when}</p>
+            <p class="text-[14.5px] leading-relaxed text-body">{w.what}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <div class="grid gap-6 rounded-[var(--radius-panel)] bg-gold-tint p-7 ring-1 ring-gold-line sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+      <div class="space-y-3">
+        <Eyebrow tone="gold">After you graduate</Eyebrow>
+        <h2 class="text-[28px] font-extrabold leading-tight">Alumni become mentors.</h2>
+        <p class="text-[15px] leading-relaxed text-gold-ink">
+          Graduates stay in the network, share what they go on to build, and come back to guide the next cohort.
+        </p>
+      </div>
+      <div class="flex lg:justify-end">
+        <ButtonLink href="/apply">How to apply</ButtonLink>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction title="Not ready for a cohort?" text="Create a free account and start with courses on your own. You can apply for a cohort when applications open." />
+</Base>

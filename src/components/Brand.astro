@@ -1,0 +1,13 @@
+---
+interface Props {
+  light?: boolean;
+  /** Hide the name on narrow screens (the header), keeping only the mark. */
+  compact?: boolean;
+}
+const { light = false, compact = false } = Astro.props;
+---
+
+<a href="/" class="inline-flex items-center gap-3" aria-label="The African Dream Lab, home">
+  <span aria-hidden="true" class="inline-grid h-9 w-9 place-items-center rounded-[10px] bg-gold font-display text-[15px] font-extrabold text-forest">D</span>
+  <span class:list={['whitespace-nowrap font-display text-[15px] font-bold', light ? 'text-white' : 'text-ink', compact && 'hidden sm:inline']}>The African Dream Lab</span>
+</a>

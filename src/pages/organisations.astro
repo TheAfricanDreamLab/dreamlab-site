@@ -1,0 +1,96 @@
+---
+import ButtonLink from '../components/ButtonLink.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Base from '../layouts/Base.astro';
+import { app } from '../lib/site';
+
+const KINDS = [
+  {
+    id: 'schools',
+    kind: 'institution',
+    tag: 'Schools & academies',
+    title: 'Run your cohorts on the platform.',
+    points: [
+      'Your own space at your-name.theafricandreamlab.com',
+      'Admissions, cohorts, classes and attendance in one place',
+      'Credit hours, residencies and graduation requirements',
+      'Instructors, mentors and admins, each with the right access',
+    ],
+    status: 'We review new schools before they go live. You can set up and invite co-admins while you wait.',
+    cta: 'Bring your school',
+  },
+  {
+    id: 'companies',
+    kind: 'enterprise',
+    tag: 'Companies & teams',
+    title: 'Grow your people.',
+    points: [
+      'Invite your team by email or phone',
+      'Organise people into departments and teams',
+      'Assign learning and follow progress',
+      'Your own private courses alongside the shared catalogue',
+    ],
+    status: 'Your space is ready the moment you create it.',
+    cta: 'Set up your team',
+  },
+  {
+    id: 'partners',
+    kind: 'partner',
+    tag: 'Content partners',
+    title: 'Publish courses for others to learn from.',
+    points: [
+      'Build courses with modules, lessons and assignments',
+      'Reach learners, schools and teams across the platform',
+      'See how your courses are going',
+    ],
+    status: 'Partners start with a short review, so learners can trust what they see.',
+    cta: 'Become a partner',
+  },
+  {
+    id: 'sponsors',
+    kind: 'sponsor',
+    tag: 'Sponsors & funders',
+    title: 'Fund learners and follow their progress.',
+    points: ['Sponsor learners, seats or scholarships', 'Follow the progress of the people you support', 'See the work they produce'],
+    status: 'Sponsors start with a short review before they go live.',
+    cta: 'Become a sponsor',
+  },
+];
+---
+
+<Base title="For organisations" description="Run cohorts, train your team, publish courses or sponsor learners on The African Dream Lab.">
+  <PageHeader
+    eyebrow="For organisations"
+    title="Bring your organisation."
+    intro="Schools, companies, content partners and sponsors all run on the same platform, each in their own space. Setting one up takes a few minutes from your account."
+  />
+
+  <section class="mx-auto max-w-6xl space-y-5 px-5 pb-20 sm:px-8">
+    {
+      KINDS.map((k) => (
+        <article id={k.id} class="grid scroll-mt-8 gap-8 rounded-[var(--radius-panel)] bg-card p-7 shadow-[var(--shadow-card)] ring-1 ring-line sm:p-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div class="space-y-4">
+            <Eyebrow tone="green">{k.tag}</Eyebrow>
+            <h2 class="text-[28px] font-extrabold leading-tight">{k.title}</h2>
+            <p class="text-[14px] leading-relaxed text-muted">{k.status}</p>
+            <ButtonLink href={app(`/orgs/new?kind=${k.kind}`)}>{k.cta}</ButtonLink>
+          </div>
+          <ul class="space-y-3 self-center">
+            {k.points.map((p) => (
+              <li class="flex gap-3 text-[15px] leading-relaxed text-body">
+                <span aria-hidden="true" class="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-success-tint text-[11px] font-bold text-link">
+                  ✓
+                </span>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </section>
+
+  <CallToAction title="Start with your own account." text="Organisations are created from a personal account, so you can use it to learn too. It takes two minutes." />
+</Base>

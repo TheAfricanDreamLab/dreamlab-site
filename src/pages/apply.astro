@@ -1,0 +1,56 @@
+---
+import ButtonLink from '../components/ButtonLink.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Base from '../layouts/Base.astro';
+import { app } from '../lib/site';
+
+const STEPS = [
+  { title: 'Application', text: 'The basics about you and where you are now.' },
+  { title: 'Your dream', text: 'What you want to build, and why it matters to you.' },
+  { title: 'Evidence of action', text: 'Something you have already started or done, however small.' },
+  { title: 'Assessment and video', text: 'A short assessment and a video in your own words.' },
+  { title: 'Interview', text: 'A conversation with the team.' },
+  { title: 'Scholarship and decision', text: 'Scholarship review, then a decision made by people, never by a machine.' },
+];
+---
+
+<Base title="Apply" description="How to apply for The African Dream Lab cohort programme.">
+  <PageHeader
+    eyebrow="Apply"
+    title="Applications for the next cohort open soon."
+    intro="We take a new cohort through the programme together. When applications open, you’ll apply from your account. Create one now so you’re ready, and start learning in the meantime."
+  />
+
+  <section class="mx-auto max-w-6xl px-5 pb-12 sm:px-8">
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <ButtonLink href={app('/signup')}>Create my account</ButtonLink>
+      <ButtonLink href="/programme" variant="secondary">Read about the programme</ButtonLink>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <div class="grid gap-10 rounded-[var(--radius-panel)] bg-surface p-7 ring-1 ring-line sm:p-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div class="space-y-3">
+        <Eyebrow>How it works</Eyebrow>
+        <h2 class="text-[28px] font-extrabold leading-tight">What the application asks of you.</h2>
+        <p class="text-[14.5px] leading-relaxed text-muted">
+          Each step is short. You can save and come back. We look for people who are already acting on their dream, not perfect CVs.
+        </p>
+      </div>
+      <ol class="grid gap-3 sm:grid-cols-2">
+        {
+          STEPS.map((s, i) => (
+            <li class="flex gap-4 rounded-[var(--radius-card)] bg-card p-5 ring-1 ring-line">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary font-display text-sm font-bold text-white">{i + 1}</span>
+              <div class="space-y-1">
+                <h3 class="text-[16px] font-bold">{s.title}</h3>
+                <p class="text-[13.5px] leading-relaxed text-body">{s.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Base>

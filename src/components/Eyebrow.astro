@@ -1,0 +1,12 @@
+---
+/** Small uppercase mono label above headings. */
+interface Props {
+  tone?: 'muted' | 'gold' | 'green';
+  class?: string;
+}
+const { tone = 'muted', class: className } = Astro.props;
+// gold-ink, not the decorative gold: small labels need 4.5:1 contrast on the light background.
+const color = { muted: 'text-muted', gold: 'text-gold-ink', green: 'text-link' }[tone];
+---
+
+<p class:list={['font-mono text-[10.5px] uppercase tracking-[0.14em]', color, className]}><slot /></p>

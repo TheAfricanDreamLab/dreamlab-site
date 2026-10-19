@@ -1,0 +1,26 @@
+---
+import { app } from '../lib/site';
+import ButtonLink from './ButtonLink.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Start with a free account.',
+  text = 'Your name, an email or phone, and a password. Then a 6-digit code, and you’re in.',
+} = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+  <div class="flex flex-col gap-6 rounded-[var(--radius-panel)] bg-[radial-gradient(120%_90%_at_0%_0%,#0f6a49_0%,#0a3d29_65%)] p-8 text-white shadow-[var(--shadow-panel)] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+    <div class="max-w-xl space-y-2">
+      <h2 class="text-[28px] font-extrabold leading-tight text-white">{title}</h2>
+      <p class="text-[15px] leading-relaxed text-white/75">{text}</p>
+    </div>
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <ButtonLink href={app('/signup')} variant="light">Create my account</ButtonLink>
+      <a href={app('/login')} class="inline-flex h-12 items-center justify-center rounded-[var(--radius-field)] px-6 text-[15px] font-semibold text-white ring-1 ring-white/30 hover:bg-white/10">Sign in</a>
+    </div>
+  </div>
+</section>
