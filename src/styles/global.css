@@ -86,9 +86,10 @@
     color: var(--color-ink);
   }
 
+  /* A solid, high-contrast ring for keyboard users (WCAG 2.2 focus visible / focus appearance). */
   :focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus);
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
   }
 }
 
