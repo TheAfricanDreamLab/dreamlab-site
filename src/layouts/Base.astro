@@ -29,7 +29,8 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/brand/adn-logo.png" />
+    <link rel="apple-touch-icon" href="/brand/adn-logo.png" />
     <meta name="theme-color" content="#0a3d29" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
@@ -44,7 +45,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       <nav aria-label="Main" class="flex items-center gap-2 text-[14px] font-semibold sm:gap-6">
         {
           NAV.map((n) => (
-            <a href={n.href} aria-current={path === n.href ? 'page' : undefined} class:list={['hidden md:inline', path === n.href ? 'text-ink' : 'text-body hover:text-ink']}>
+            <a href={n.app ? app(n.href) : n.href} aria-current={path === n.href ? 'page' : undefined} class:list={['hidden md:inline', path === n.href ? 'text-ink' : 'text-body hover:text-ink']}>
               {n.label}
             </a>
           ))
@@ -66,7 +67,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
         </div>
         <nav aria-label="Site" class="flex flex-col gap-2">
           <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Explore</span>
-          {NAV.map((n) => <a href={n.href} class="text-body hover:text-ink">{n.label}</a>)}
+          {NAV.map((n) => <a href={n.app ? app(n.href) : n.href} class="text-body hover:text-ink">{n.label}</a>)}
           <a href="/apply" class="text-body hover:text-ink">Apply</a>
         </nav>
         <nav aria-label="Account" class="flex flex-col gap-2">
