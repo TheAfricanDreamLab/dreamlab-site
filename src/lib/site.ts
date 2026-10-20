@@ -8,6 +8,7 @@ const APP_URL = (import.meta.env.PUBLIC_APP_URL ?? '').replace(/\/$/, '');
 export const app = (path: string) => `${APP_URL}${path}`;
 
 export const NAV = [
+  { href: '/courses', label: 'Courses', app: true },
   { href: '/programme', label: 'Programme' },
   { href: '/organisations', label: 'For organisations' },
   { href: '/about', label: 'About' },
