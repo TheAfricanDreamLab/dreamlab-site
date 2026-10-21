@@ -64,14 +64,17 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       // These pages are static; ask the web app whether this browser is signed in, then show the
       // right header. Signed out (or the app unreachable) keeps the default Sign in / Get started.
       const sessionUrl = (import.meta.env.PUBLIC_APP_URL ?? '').replace(/\/$/, '') + '/auth/session';
-      fetch(sessionUrl, { credentials: 'include', cache: 'no-store' })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((s) => {
-          if (!s?.signedIn) return;
-          document.querySelectorAll<HTMLElement>('[data-session="out"]').forEach((el) => (el.hidden = true));
-          document.querySelectorAll<HTMLElement>('[data-session="in"]').forEach((el) => (el.hidden = false));
-        })
-        .catch(() => undefined);
+      const show = (signedIn: boolean) => {
+        document.querySelectorAll<HTMLElement>('[data-session="out"]').forEach((el) => (el.hidden = signedIn));
+        document.querySelectorAll<HTMLElement>('[data-session="in"]').forEach((el) => (el.hidden = !signedIn));
+      };
+      const refreshSession = () =>
+        fetch(sessionUrl, { credentials: 'include', cache: 'no-store' })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((s) => show(Boolean(s?.signedIn)))
+          .catch(() => show(false));
+      // Also on pages restored by Back / Forward: the session may have ended since.
+      window.addEventListener('pageshow', refreshSession);
     </script>
 
     <main id="main">
