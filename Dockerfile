@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1.7
 # The public site: an Astro static build served by nginx on 8080.
-ARG NODE_VERSION=24.15-alpine
+# Node 24.22.1: the October 2026 security release (Brotli RCE, TLS hostname bypasses).
+ARG NODE_VERSION=24.22.1-alpine
 
 FROM node:${NODE_VERSION} AS build
 RUN corepack enable
