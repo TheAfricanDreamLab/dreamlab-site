@@ -13,5 +13,6 @@ try {
 export default defineConfig({
   site: process.env.SITE_URL ?? 'https://learn.theafricandreamlab.com',
   integrations: [sitemap()],
-  vite: { plugins: [tailwindcss()] },
+  // Scripts stay in files (never inlined), so the content security policy can allow 'self' only.
+  vite: { plugins: [tailwindcss()], build: { assetsInlineLimit: 0 } },
 });
